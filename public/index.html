@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login Form</title>
+    <style>
+        .warranty-registration-container {
+            width: 100%;
+            height: fit-content;
+            overflow: hidden;
+        }
+
+        .warranty-registration-container #controls input,
+        .warranty-registration-container #controls select {
+            margin-right: 10px;
+            padding: 8px;
+        }
+
+        .item-table-wrapper p {
+            border-right: 1px solid #154069;
+        }
+
+        .table-head p:last-child,
+        .item-table-wrapper p:last-child {
+            border-right: none;
+        }
+
+        .warranty-registration-container #page-info {
+            font-size: 14px;
+        }
+
+        input#searchInputTable {
+            width: 100%;
+            max-width: 280px;
+        }
+
+        input#searchInputTable::placeholder {
+            font-size: 14px;
+        }
+
+        input#searchInputTable::-ms-input-placeholder {
+            font-size: 14px;
+        }
+
+        #warranty-registered-form--container {
+            width: 100%;
+            margin: auto;
+            display: block;
+            height: 100%;
+            overflow: auto;
+            padding: 0 1rem 1rem 1rem;
+        }
+
+        #warranty-registered-form {
+            width: 100%;
+            margin: auto;
+            display: block;
+            max-width: 550px;
+            border: 2px solid #2b354e;
+            border-radius: 13px;
+        }
+
+        #warranty-registered-items {
+            display: flex;
+            width: 0;
+            height: 0;
+            visibility: hidden;
+            max-width: 0;
+            gap: 0;
+            flex-wrap: wrap;
+            margin: auto;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            padding: 0;
+        }
+
+        #warranty-registered-form .customer-id {
+            visibility: hidden;
+            width: 0;
+            height: 0;
+            display: none;
+            margin-bottom: 0 !important;
+        }
+
+        .listWarrantyItem {
+            width: 100%;
+            padding: 1.5rem 0 1rem 0;
+            max-width: var(--site-width);
+            display: grid;
+            grid-template-columns: 1fr;
+            align-items: center;
+            margin: 1rem auto 0 auto;
+            max-width: 550px;
+            justify-content: center;
+            justify-items: center;
+        }
+
+        .listWarrantyItem--none {
+            width: 100%;
+            padding: 1rem 0 1rem 0;
+            max-width: var(--site-width);
+            display: grid;
+            grid-template-columns: 1fr;
+            align-items: center;
+            margin: 2rem auto 2rem auto;
+            max-width: 550px;
+            justify-items: center;
+            gap: 1rem;
+        }
+
+        .listWarrantyItem .h2 {
+            width: 100%;
+            text-align: left;
+            margin: 1rem auto auto auto;
+            font-size: calc(1.6rem * var(--adjust-heading));
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        .listWarrantyItem img {
+            object-fit: cover;
+            width: 100%;
+            max-width: 100px;
+            height: 33px;
+            margin: auto;
+        }
+
+        .listWarrantyItem--none img {
+            max-width: 100px;
+            margin: auto;
+            object-fit: cover;
+            width: 100%;
+            height: 33px;
+        }
+
+        .listWarrantyItem--none a {
+            border: 1px solid #2b354e;
+            width: 100%;
+            max-width: 120px;
+            margin: auto;
+            padding: 0.5rem 0.5rem;
+            font-size: calc(0.8rem * var(--adjust-body));
+            text-align: center;
+            font-weight: bold;
+            border-radius: 5px;
+            text-transform: uppercase;
+        }
+
+        .listWarrantyItem--none a:hover {
+            border: 2px solid #2b354e;
+        }
+
+        .registered-input_wrapper {
+            margin-bottom: 0.7rem !important;
+        }
+
+        .add-product-warranty {
+            font-weight: 600;
+            padding: 0 1rem;
+            width: 100%;
+            margin: auto;
+            max-width: 1200px;
+        }
+
+        #warranty-registered-form #warrantyRegisterForm button {
+            width: 100%;
+            margin: auto;
+            color: #2b354e;
+            border-radius: 3px;
+            background-color: #ffffff;
+            border: 1px solid #2b354e2e;
+            padding: 0.5em;
+            border-radius: 12px;
+        }
+
+        #warranty-registered-form #warrantyRegisterForm button:hover {
+            border: 2px solid #2b354e;
+            background-color: #ffffff;
+            color: #2b354e;
+            font-weight: 600;
+        }
+
+
+        /* #warranty-registered-form .warranty-registered--content-wrapper_heading {
+            color: #2b354e;
+            font-size: calc(3.5rem * var(--adjust-heading));
+        }
+
+        #warranty-registered-form .warranty-registered--content-wrapper_content {
+            color: #2b354e;
+        }
+
+        #warranty-registered-form .warranty-registered--content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 450px;
+            padding: 1.5rem 2rem 0 2rem;
+            margin: auto;
+            color: #2b354e;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        } */
+
+
+        #warranty-registered-form form {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+            background-color: transparent;
+            width: 100%;
+            max-width: 450px;
+            padding: 2rem;
+            margin: auto;
+            background-color: #ffffff;
+            color: #2b354e;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        #warranty-registered-form .registered-input_wrapper {
+            border: 2px solid #ffffff;
+            padding: 0;
+            border-radius: 3px;
+            width: 100%;
+            max-width: 550px;
+            margin: auto;
+            background-color: #2b354e;
+        }
+
+        #warranty-registered-form input {
+            padding: 0.4rem 1rem;
+            border: 1px solid #2b354e2e;
+            border-radius: 7px;
+            margin-top: 0.3rem;
+        }
+
+        #warranty-registered-form label {
+            display: grid;
+            grid-template-columns: 1fr;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            justify-items: stretch;
+            width: 100%;
+            max-width: 550px;
+            margin: auto;
+            background-color: #ffffff;
+            border-radius: 0px;
+            color: #2b354e;
+            padding: 0;
+        }
+
+        #SuccessNotification {
+            display: none;
+            color: #ffffff !important;
+            background-color: #5cb85c !important;
+            max-width: calc(100% - 4rem);
+            position: absolute;
+            margin: auto !important;
+            bottom: 14px;
+            right: 2rem;
+            z-index: 1;
+        }
+
+        #FailedNotification {
+            display: none;
+            color: #ffffff !important;
+            background-color: red !important;
+            max-width: calc(100% - 4rem);
+            position: absolute;
+            margin: auto !important;
+            bottom: 2rem;
+            right: 2rem;
+        }
+
+        #formProductType {
+            padding: 7px 20px;
+        }
+
+        .registered-input_wrapper--grid {
+            grid-template-columns: 1fr 1fr;
+            display: grid;
+            gap: 1rem;
+        }
+
+        #formOrderPlace {
+            padding-top: 7px;
+            padding-bottom: 7px;
+        }
+
+        #section-template--23114432184635__ex_warranty_form_DVYxKx h3,
+        #section-template--23114432184635__ex_warranty_form_DVYxKx .h3 {
+            --heading-size: calc(1.3rem * var(--adjust-heading)) !important;
+        }
+
+        @media screen and (max-width: 768px) {
+            #warranty-registered-items {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 650px) {
+            #warranty-registered-items {
+                grid-template-columns: 1fr;
+            }
+
+            #warranty-registered-form .warranty-registered--content-wrapper_heading {
+                font-size: calc(2.2rem * var(--adjust-heading));
+            }
+
+            #warranty-registered- label {
+                grid-template-columns: 1fr;
+                padding: 0.5rem;
+            }
+
+            .registered-input_wrapper--grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .warranty-registration-container #controls {
+            margin-bottom: 20px;
+            display: flex;
+            width: fit-content;
+            justify-content: flex-end;
+        }
+
+        .warranty-registration-container {
+            width: 100%;
+            height: fit-content;
+            overflow: hidden;
+        }
+
+        .warranty-registration-container #controls input,
+        .warranty-registration-container #controls select {
+            margin-right: 10px;
+            padding: 8px
+        }
+
+        .warranty-registration-container #controls select {
+            border: 1px solid #2B354E;
+            text-align: center;
+        }
+
+        .warranty-registration-container #pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: calc(var(--site-width) - 160px);
+            width: 100%;
+            gap: 1rem;
+            margin: 1rem auto;
+        }
+
+        .warranty-registration-container #pagination button {
+            padding: 2px 20px;
+            width: 100%;
+            max-width: max-content;
+            transform: none;
+            background-color: #154069;
+            color: #FFFFFF;
+            border: 1px solid;
+            font-size: 14px;
+        }
+
+        div#data-table {
+            width: fit-content;
+        }
+
+        .data-table--wrapper {
+            width: 100%;
+        }
+
+        button#next-button {
+            transform: rotate(90deg);
+        }
+
+        button#prev-button {
+            transform: rotate(270deg);
+        }
+
+        .control-container {
+            display: flex;
+            flex-wrap: nowrap;
+            width: 100%;
+            gap: 1rem;
+            align-items: center;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        .table-head {
+            border: 1px solid #A9A9A9;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            background-color: #154069;
+            color: #FFFFFF
+        }
+
+        .item-table-wrapper {
+            border: 1px solid #A9A9A9;
+            border-top: none;
+        }
+
+        .table-head,
+        .item-table-wrapper {
+            display: grid;
+            grid-template-columns: minmax(140px, 1fr) minmax(220px, 1fr) minmax(180px, 1fr) minmax(220px, 1fr) minmax(180px, 1fr) minmax(180px, 1fr) minmax(380px, 1fr) minmax(140px, 1fr);
+        }
+
+        .warranty-list__datetime {
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            flex-direction: row;
+            border-right: 1px solid;
+            align-items: stretch;
+        }
+
+        .warranty-list__datetime {
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            flex-direction: row;
+            border-right: 1px solid #A9A9A9;
+            ;
+        }
+
+        .datetime__warranty {
+            width: 100%;
+        }
+
+        .datetime__warranty:first-child::before {
+            border-right: 0px solid #A9A9A9;
+        }
+
+        .datetime__warranty span {
+            font-weight: normal;
+            color: #121212;
+        }
+
+        .item-table-wrapper:last-child {
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        .table-head p,
+        .item-table-wrapper p {
+            text-align: left;
+            font-size: 14px;
+            padding: 0.5rem;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .table-head p {
+            border-right: 1px solid #A9A9A9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .item-table-wrapper p {
+            border-right: 1px solid #A9A9A9;
+            ;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 59px;
+        }
+
+        .table-head p:last-child,
+        .item-table-wrapper p:last-child {
+            border-right: none;
+        }
+
+        .warranty-registration-container #page-info {
+            font-size: 14px;
+        }
+
+        input#searchInputTable {
+            width: 100%;
+            max-width: 280px;
+        }
+
+        input#searchInputTable::placeholder {
+            font-size: 14px;
+            color: #A9A9A9;
+        }
+
+        input#searchInputTable:focus {
+            border: 1px solid #2B354E;
+        }
+
+        input#searchInputTable::-ms-input-placeholder {
+            color: #A9A9A9;
+            font-size: 14px;
+        }
+
+
+
+        #exportExcel {
+            font-weight: 500;
+            border: 1px solid #2B354E;
+            padding: 0.5rem 0.5rem;
+            font-size: calc(0.8rem* var(--adjust-body));
+            margin: 0 0 auto auto;
+            width: 100%;
+            display: flex;
+            max-width: 100px;
+            text-align: center;
+            justify-content: center;
+        }
+
+
+        #warranty-registered-items {
+            display: flex;
+            width: 0;
+            height: 0;
+            visibility: hidden;
+            max-width: 0;
+            gap: 0;
+            flex-wrap: wrap;
+            margin: auto;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            padding: 0;
+        }
+
+        #warranty-registered-form .customer-id {
+            visibility: hidden;
+            width: 0;
+            height: 0;
+            display: none;
+            margin-bottom: 0 !important;
+        }
+
+        .listWarrantyItem {
+            width: 100%;
+            padding: 1.5rem 0 1.5rem 0;
+            max-width: var(--site-width);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            margin: 1rem auto 0 auto;
+            border-top: 1px solid var(--border);
+        }
+
+        .registered-input_wrapper {
+            margin-bottom: 0.7rem !important;
+        }
+
+        .listWarrantyItem h1 {
+            margin: 0;
+            text-align: left;
+        }
+
+        .listWarrantyItem h1.h2,
+        .add-product-warranty {
+            font-weight: 600;
+        }
+
+        .add-product-warranty {
+            font-weight: 600;
+            padding: 0 1rem;
+            width: 100%;
+            margin: auto;
+            max-width: 1200px;
+        }
+
+        .listWarrantyItem button {
+            font-weight: 500;
+            border: 1px solid #2B354E;
+            padding: 0.5rem 0.5rem;
+            font-size: calc(0.8rem * var(--adjust-body));
+        }
+
+        .items-cardWrapper-title--bottom {
+            font-weight: bold;
+            margin: 1rem auto;
+            text-align: center;
+            background-color: #163F6A;
+            padding: 1rem;
+            border-radius: 5px;
+            color: #FFFFFF;
+        }
+
+        .items-cardWrapper-img {
+            max-width: 93px;
+            width: 100%;
+            margin: auto;
+            display: flex;
+            align-items: flex-start;
+            height: 35px;
+            object-fit: cover;
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            display: none;
+        }
+
+        .items-cardWrapper-title {
+            margin: 1rem auto 1rem;
+            text-align: center;
+            width: 100%;
+        }
+
+        .items-cardWrapper {
+            width: 100%;
+            max-width: 100%;
+            border: 2px solid #2B354E;
+            background-color: #FFFFFF;
+            padding: 0 1rem;
+            color: #2B354E;
+            border-radius: 7px;
+            height: 100%;
+        }
+
+        .items-cardWrapper--content {
+            height: 100%;
+            display: grid;
+            align-content: center;
+            align-items: center;
+        }
+
+        .items-cardWrapper h4 {
+            color: #2B354E;
+        }
+
+        .items-cardWrapper_product {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            justify-content: start;
+            align-content: center;
+            background-color: #2893;
+            padding: 0 1rem;
+        }
+
+        .items-cardWrapper_product:nth-of-type(1) {
+            padding-top: 1rem;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .items-cardWrapper_product--purchase {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            justify-content: start;
+            align-content: center;
+            background-color: #2893;
+            padding: 0 1rem;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            padding-bottom: 1rem;
+        }
+
+        .items-cardWrapper_product:last-child {
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            padding-bottom: 1rem;
+        }
+
+        .items-cardWrapper_product--purchase p,
+        .items-cardWrapper_product p {
+            margin-bottom: 0.2rem;
+            margin-top: 0.2rem;
+            font-size: calc(0.85rem * var(--adjust-body));
+        }
+
+        #warranty-registered-form #warrantyRegisterForm button {
+            width: 100%;
+            margin: auto;
+            color: #2B354E;
+            border-radius: 3px;
+            background-color: #FFFFFF;
+            border: 1px solid #2b354e2e;
+            padding: 0.5em;
+            border-radius: 12px;
+        }
+
+        #warranty-registered-form #warrantyRegisterForm button:hover {
+            border: 2px solid #2B354E;
+            background-color: #FFFFFF;
+            color: #2B354E;
+            font-weight: 600;
+        }
+
+        #warranty-registered-form .warranty-registered--content-wrapper_heading {
+            color: #2B354E;
+            font-size: calc(3.5rem * var(--adjust-heading));
+        }
+
+        #warranty-registered-form .warranty-registered--content-wrapper_content {
+            color: #2B354E;
+        }
+
+        #warranty-registered-form .registered-input_wrapper {
+            border: 2px solid #FFFFFF;
+            padding: 0;
+            border-radius: 3px;
+            width: 100%;
+            max-width: 550px;
+            margin: auto;
+            background-color: #2B354E;
+        }
+
+        #warranty-registered-form input {
+            padding: 0.4rem 1rem;
+            border: 1px solid #2b354e2e;
+            border-radius: 7px;
+            margin-top: 0.3rem;
+        }
+
+        #warranty-registered-form label {
+            display: grid;
+            grid-template-columns: 1fr;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            justify-items: stretch;
+            width: 100%;
+            max-width: 550px;
+            margin: auto;
+            background-color: #FFFFFF;
+            border-radius: 0px;
+            color: #2B354E;
+            padding: 0;
+        }
+
+        #SuccessNotification {
+            display: none;
+            color: #FFFFFF !important;
+            background-color: #5cb85c !important;
+            max-width: calc(100% - 4rem);
+            position: absolute;
+            margin: auto !important;
+            bottom: 14px;
+            right: 2rem;
+            z-index: 1;
+        }
+
+        #FailedNotification {
+            display: none;
+            color: #FFFFFF !important;
+            background-color: red !important;
+            max-width: calc(100% - 4rem);
+            position: absolute;
+            margin: auto !important;
+            bottom: 2rem;
+            right: 2rem;
+        }
+
+        #formProductType {
+            padding: 7px 20px;
+        }
+
+        .registered-input_wrapper--grid {
+            grid-template-columns: 1fr 1fr;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .data-table--wrapper {
+            overflow-y: hidden;
+            overflow-x: scroll;
+            width: 100%;
+            scrollbar-width: thin;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .data-table--wrapper::-webkit-scrollbar {
+            width: 2px;
+        }
+
+        /* Track */
+        .data-table--wrapper::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        .data-table--wrapper::-webkit-scrollbar-thumb {
+            background: #2B354E;
+        }
+
+        /* Handle on hover */
+        .data-table--wrapper::-webkit-scrollbar-thumb:hover {
+            background: #2B354E;
+        }
+
+        #prev-button:disabled {
+            opacity: 0.5
+        }
+
+        #next-button:disabled {
+            opacity: 0.5
+        }
+
+        #formOrderPlace {
+            padding-top: 7px;
+            padding-bottom: 7px;
+        }
+
+        .items-cardWrapper .items-cardWrapper_product h4 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+            width: calc(100% - 10px);
+        }
+
+        .user-data__empty {
+            grid-column: 1 / span 3;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        #data-table h2.user-data__empty {
+            margin: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            #warranty-registered-items {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 650px) {
+            #warranty-registered-items {
+                grid-template-columns: 1fr;
+            }
+
+            #warranty-registered-form .warranty-registered--content-wrapper_heading {
+                font-size: calc(2.2rem * var(--adjust-heading));
+            }
+
+            #warranty-registered- label {
+                grid-template-columns: 1fr;
+                padding: 0.5rem;
+            }
+
+            .registered-input_wrapper--grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>From Debugging</h1>
+    <div id="shopify-section-template--23114432184635__ex_warranty_form_DVYxKx" class="shopify-section warranty--form">
+        <div class="wrapper warranty-registration-container"
+            id="section-template--23114432184635__ex_warranty_form_DVYxKx">
+            <div class="listWarrantyItem"></div>
+            <div id="warranty-registered-form--container">
+                <div id="warranty-registered-form" style="position: relative">
+                    <form action="" id="warrantyRegisterForm" onsubmit="submitWarranty(event)">
+
+                        <div class="registered-input_wrapper--grid">
+                            <div class="registered-input_wrapper customer-name">
+                                <label>
+                                    Name
+                                    <input type="text" id="customerName" name="name" placeholder="Customer Name"
+                                        required />
+                                </label>
+                            </div>
+
+                            <div class="registered-input_wrapper customer-email">
+                                <label>
+                                    Email
+                                    <input type="text" id="customerEmail" name="email" placeholder="Email" required />
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="registered-input_wrapper--grid">
+                            <div class="registered-input_wrapper customer-name">
+                                <label>
+                                    First Name
+                                    <input type="text" id="firstName" name="firstname" placeholder="First Name" />
+                                </label>
+                            </div>
+
+                            <div class="registered-input_wrapper customer-email">
+                                <label>
+                                    Last Name
+                                    <input type="text" id="lastName" name="lastname" placeholder="Last Name" />
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="registered-input_wrapper--grid">
+                            <div class="registered-input_wrapper">
+                                <label>
+                                    No. Telp/Hp
+                                    <input type="text" id="phoneNumber" name="phone" placeholder="Phone Number"
+                                        value="082122229090" />
+                                </label>
+                            </div>
+
+                            <div class="registered-input_wrapper">
+                                <label>
+                                    Alamat
+                                    <input type="text" id="userAddress" name="address" placeholder="Address"
+                                        value="bogor" />
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="registered-input_wrapper--grid">
+                            <div class="registered-input_wrapper">
+                                <label>
+                                    Profile Picture
+                                    <input type="file" id="profilePicture" name="profilepicture"
+                                        placeholder="Profile Picture" />
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="registered-input_wrapper--grid">
+                            <div class="registered-input_wrapper">
+                                <label>
+                                    Password
+                                    <input required type="text" id="password" name="password" placeholder="Password" />
+                                </label>
+                            </div>
+
+                            <div class="registered-input_wrapper">
+                                <label>
+                                    Repeat Password
+                                    <input required type="text" id="repeatpassword" name="repeatpassword"
+                                        placeholder="Repeat Password" />
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit">Submit</button>
+                        <button type="button" disabled="" id="SuccessNotification">
+                            Success <span style="font-size: 15px">Refresh Automaticly</span>
+                        </button>
+                        <button type="button" disabled="" id="FailedNotification">
+                            Failed, Try Again
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper warranty-registration-container" id="section-">
+        <div class="listWarrantyItem">
+            <h1 class="h2">Product List</h1>
+        </div>
+
+        <div id="warranty-registered-items">
+
+        </div>
+
+        <div>
+
+        </div>
+        <div id="warranty-registered-form--container">
+        </div>
+
+
+        <div class="control-container">
+            <div id="controls">
+                <input type="text" id="searchInputTable" placeholder="Search by Name or Email or Order number">
+                <select id="itemsPerPage">
+                    <option value="5">5</option>
+                    <option value="10" selected="">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
+            <button type="button" id="exportExcel">Export Data</button>
+        </div>
+        <div class="data-table--wrapper">
+            <div id="data-table">
+                <div class="table-head">
+                    <p data-customer="customer_id" data-align="center" data-field="name" data-sortable="true">Name</p>
+                    <p class="sep-left-cell" data-align="center" data-field="email" data-sortable="true">Email</p>
+                    <p class="sep-left-cell" data-align="center" data-field="phone" data-sortable="true">Phone</p>
+                    <p class="sep-left-cell" data-align="center" data-field="product" data-sortable="true">Product</p>
+                </div>
+            </div>
+            <div id="tableContent">
+            </div>
+        </div>
+    </div>
+    <div id="pagination">
+        <button id="prev-button" disabled="">
+            Previous
+        </button>
+        <span id="page-info">Page 1 of 1</span>
+        <button id="next-button" disabled="">
+            Next
+        </button>
+    </div>
+
+    </div>
+
+    <script>
+ 
+    </script>
+</body>
+
+</html>
