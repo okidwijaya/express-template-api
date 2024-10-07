@@ -23,7 +23,6 @@ const getProductByKeyIdModel = (id) => {
 
 const addProductModel = (body, files) => {
     return new Promise((resolve, reject) => {
-        console.log(body);
         let user = body.user_id;
         let title = body.title;
 
