@@ -1,4 +1,21 @@
-const { addTransactionModel }= require('../models/templateTransactionModel');
+const { addTransactionModel, getAllTransactionModel }= require('../models/storeTransactionModel');
+
+const getAllTransactionController = (req, res) => {
+    getAllTransactionModel()
+    .then(({ status, result}) => {
+        res.status(status).json({
+            status: status,
+            result: result
+        })
+    })
+    .catch(err => {
+        console.error(err);
+        res.status(500).json({
+            message: err.message || 'Internal Server Error',
+            error: err.err || err
+        });
+    });
+}
 
 const addTransactionController = (req, res) => {
     const { body } = req;
@@ -19,5 +36,6 @@ const addTransactionController = (req, res) => {
 }
 
 module.exports = {
-    addTransactionController
+    addTransactionController,
+    getAllTransactionController
 }

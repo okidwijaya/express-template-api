@@ -1,11 +1,13 @@
 const express = require("express");
 
-const templateTransactionRouter = express.Router();
+const storeTransactionRouter = express.Router();
 
-const useController = require("../controllers/templateTransactionController");
+const useController = require("../controllers/storeTransactionController");
 
-templateTransactionRouter.post('/', useController.addTransactionController);
+storeTransactionRouter.post('/', useController.addTransactionController);
 
-// templateCartRouter.get('/:id', useController.getCartProductController);
+storeTransactionRouter.get('/', useController.getAllTransactionController);
 
-module.exports = templateTransactionRouter;
+// storeCartRouter.get('/:id', useController.getCartProductController);
+
+module.exports = storeTransactionRouter;
