@@ -50,7 +50,34 @@ const addUserCartModel = (body) => {
     })
 }
 
+const deleteCartByKeyIdModel = (id) => {
+    return new Promise((resolve, reject) => {
+        const query = `DELETE FROM cart WHERE id = '${id}'`;
+        console.log(query);
+        pool.query(query, (err, result) => {
+            if(err) return reject({status: 500, err});
+            resolve({status: 201, result: result});
+        })
+    })
+}
+
+const updateCartModel = (id, body) => {
+    return new Promise((resolve, reject) => {
+        const data = {
+            id: id,
+            data: body
+        } 
+        const query = `UPDATE cart SET ? WHERE id = ${id}`;
+        pool.query(query, [body, id], (err, result) => {
+            if(err) return reject({status: 500, err});
+            resolve({status: 200, result: data});
+        })
+    })
+}
+
 module.exports = {
     getAllCartByUserIdModel,
-    addUserCartModel
+    addUserCartModel,
+    deleteCartByKeyIdModel,
+    updateCartModel
 }

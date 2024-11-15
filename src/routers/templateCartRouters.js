@@ -8,4 +8,8 @@ templateCartRouter.post('/', useController.addProductToCartController);
 
 templateCartRouter.get('/:id', useController.getCartProductController);
 
+templateCartRouter.delete('/:id', useController.deleteCartByKeyIdController);
+
+templateCartRouter.patch('/:id', useController.updateCartController);
+
 module.exports = templateCartRouter;

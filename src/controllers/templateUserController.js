@@ -1,4 +1,4 @@
-const { userRegistertrationModel, userLoginModel, usersModel } = require('../models/templateUserModel');
+const { userRegistertrationModel, userLoginModel, usersModel, getUserByIdModel, updateUserModel } = require('../models/templateUserModel');
 
 const userRegistertrationController = async (req, res) =>{
     const { body } = req;
@@ -55,8 +55,48 @@ const usersController = (req, res) => {
     })
 };
 
+const getUserByIdController = (req, res) => {
+  const { id } = req.params;
+
+  getUserByIdModel(id)
+  .then(({status, result}) => {
+      res.status(200).json({
+          status: status,
+          result: result
+      })
+  })
+  .catch(err => {
+      res.status(500).json({
+          message: 'Internal Server Error',
+          error: err
+      });
+  });
+}
+
+const updateUserController = (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+  
+  updateUserModel(id, body)
+  .then(({status, result}) => {
+      res.status(status).json({
+          status: status,
+          result: result,
+          message: 'Update User Success'
+      })
+  })
+  .catch(err => {
+      res.status(500).json({
+          message: 'Internal Server Error',
+          error: err
+      });
+  });
+}
+
 module.exports = {
     userRegistertrationController,
     userLoginController,
-    usersController
+    usersController,
+    getUserByIdController,
+    updateUserController
 }

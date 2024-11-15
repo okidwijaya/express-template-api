@@ -17,7 +17,7 @@ app.listen(port, () => {
 });
 
 const corsOptions = {
-    origin: ["http://localhost:3000", "http://localhost:8081", "*"],
+    origin: ["http://localhost:3000", "http://localhost:8081", "https://web-commerce-gules.vercel.app", "*"],
     allowedHeaders:[ "x-access-token", "content-type"],
     method: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
 };

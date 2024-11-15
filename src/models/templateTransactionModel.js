@@ -65,7 +65,18 @@ const addTransactionModel = (body) => {
     })
 }
 
+const getTransactionByIdModel = (id) => {
+    return new Promise((resolve, reject) => {
+        const query = `SELECT * FROM transaction WHERE user_id = '${id}'`;
+        pool.query(query, (err, result) => {
+            if(err) return reject({status: 500, err});
+            resolve({status: 200, result: result})
+        })
+    })
+  }
+
 module.exports = {
     addTransactionModel,
-    getAllTransactionModel
+    getAllTransactionModel,
+    getTransactionByIdModel
 }

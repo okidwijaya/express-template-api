@@ -16,4 +16,8 @@ templateUserRouter.post("/login", useController.userLoginController);
 
 templateUserRouter.get('/users', useController.usersController)
 
+templateUserRouter.get('/:id', useController.getUserByIdController)
+
+templateUserRouter.patch('/:id', useController.updateUserController)
+
 module.exports = templateUserRouter;

@@ -103,9 +103,35 @@ const usersModel = () => {
   });
 };
 
+const getUserByIdModel = (id) => {
+  return new Promise((resolve, reject) => {
+      const query = `SELECT * FROM user WHERE id = '${id}'`;
+      pool.query(query, (err, result) => {
+          if(err) return reject({status: 500, err});
+          resolve({status: 200, result: result})
+      })
+  })
+}
+
+const updateUserModel = (id, body) => {
+  return new Promise((resolve, reject) => {
+      const data = {
+          id: id,
+          data: body
+      } 
+      const query = `UPDATE user SET ? WHERE id = ${id}`;
+      pool.query(query, [body, id], (err, result) => {
+          if(err) return reject({status: 500, err});
+          resolve({status: 200, result: data});
+      })
+  })
+}
+
 module.exports = {
   userRegistertrationModel,
   findUserByEmail,
   userLoginModel,
   usersModel,
+  getUserByIdModel,
+  updateUserModel
 };
