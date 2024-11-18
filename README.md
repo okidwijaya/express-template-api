@@ -83,7 +83,7 @@ $ npm install
 | `id`      | `string` | :-------------------------------- |
 
 ```http
-  GET, POST, /payment
+  GET, POST, /Transactions/
 ```
 
 | Parameter | value    | Description                |
@@ -91,7 +91,7 @@ $ npm install
 | `api_key` | `string` | :------------------------- |
 
 ```http
-  DELETE /payment/${id}
+  DELETE /cart/${id}
 ```
 
 | Parameter | value    | Description                |

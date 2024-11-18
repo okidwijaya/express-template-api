@@ -54,6 +54,7 @@ const addTransactionModel = (body) => {
             .then((history) => {
                 const result = {
                     transaction: transactionResult,
+                    transactionId: orderid,
                     history: history
                 }
                 return resolve({status: 200, result: result});
