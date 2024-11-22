@@ -7,7 +7,7 @@ const getAllCartByUserIdModel = (id) =>{
             if(err) return reject({status: 500, err});
 
             if(cartResult.length === 0){
-                resolve({status: 200, message: 'Product not found'});
+                return resolve({ status: 200, result: [] });
             }
             // resolve({status: 200, result: result});
             const productsKeyId = cartResult.map(item => item.product_id);
@@ -62,17 +62,40 @@ const deleteCartByKeyIdModel = (id) => {
 }
 
 const deleteCartItemsModel = (items) => {
-    console.log('itemsmodel', items);  // Log the items to verify it's an array
     const placeholders = items.map(() => '?').join(',');
     const query = `DELETE FROM cart WHERE id IN (${placeholders})`;
 
-    console.log('Query:', query); // Log the full query for debugging
+    console.log('Executing query:', query, 'with items:', items);
 
     return new Promise((resolve, reject) => {
-        // Pass 'items' as the second argument to the query
         pool.query(query, items, (err, result) => {
             if (err) {
-                console.error('Error executing query:', err);  // Log any query errors
+                console.error('Error executing query:', err);
+                return reject({ status: 500, err });
+            }
+
+            if (result.affectedRows === 0) {
+                console.warn('No rows affected. Check if IDs exist.');
+                return reject({ status: 404, err: 'No rows matched the provided IDs.' });
+            }
+
+            resolve({ status: 201, result });
+        });
+    });
+};
+
+
+const removeitems = (items) => {
+    console.log('itemsmodel', items); 
+    const placeholders = items.map(() => '?').join(',');
+    const query = `DELETE FROM cart WHERE id IN (${placeholders})`;
+
+    console.log('Query:', query); 
+
+    return new Promise((resolve, reject) => {
+        pool.query(query, items, (err, result) => {
+            if (err) {
+                console.error('Error executing query:', err);
                 return reject({ status: 500, err });
             }
             resolve({ status: 201, result });
@@ -100,5 +123,6 @@ module.exports = {
     addUserCartModel,
     deleteCartByKeyIdModel,
     deleteCartItemsModel,
-    updateCartModel
+    updateCartModel,
+    removeitems
 }

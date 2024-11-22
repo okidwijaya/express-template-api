@@ -1,4 +1,4 @@
-const { addUserCartModel, getAllCartByUserIdModel, deleteCartByKeyIdModel, updateCartModel, deleteCartItemsModel } = require('../models/templateCartModel');
+const { addUserCartModel, getAllCartByUserIdModel, deleteCartByKeyIdModel, updateCartModel, deleteCartItemsModel, removeitems } = require('../models/templateCartModel');
 
 const getCartProductController = (req, res) => {
     const { id } = req.params;
@@ -57,10 +57,34 @@ const deleteCartByKeyIdController = (req, res) => {
 
 const deleteCartItemsController = (req, res) => {
     const { items } = req.body;
-    console.log('Received items:', items); // Check the received items in the console
-    console.log('Request body:', req.body); // Log the full body to ensure it's correct
+    console.log('Received items:', items);
 
-    // Validate that items is an array and is not empty
+    if (!Array.isArray(items) || items.length === 0) {
+        return res.status(400).json({ error: 'Invalid or empty array of item IDs.' });
+    }
+
+    deleteCartItemsModel(items)
+        .then(({ status, result }) => {
+            res.status(status).json({
+                result,
+                message: `${result.affectedRows} items deleted successfully.`,
+            });
+        })
+        .catch((err) => {
+            console.error('Error in deleteCartItemsController:', err);
+            res.status(err.status || 500).json({
+                message: 'Internal Server Error',
+                error: err.err || 'Unexpected error occurred.',
+            });
+        });
+};
+
+
+const removeitemscontroller = (req, res) => {
+    const { items } = req.body;
+    console.log('Received items:', items);
+    console.log('Request body:', req.body);
+
     if (!Array.isArray(items) || items.length === 0) {
         return res.status(400).json({ error: 'Invalid or empty array of item IDs.' });
     }
@@ -74,7 +98,7 @@ const deleteCartItemsController = (req, res) => {
             });
         })
         .catch((err) => {
-            console.error('Error deleting cart items:', err); // Log errors for debugging
+            console.error('Error deleting cart items:', err); 
             res.status(err.status || 500).json({
                 message: 'Internal Server Error',
                 error: err.err || 'Unexpected error'
@@ -108,5 +132,6 @@ module.exports = {
     getCartProductController,
     deleteCartByKeyIdController,
     deleteCartItemsController,
-    updateCartController
+    updateCartController,
+    removeitemscontroller
 }
