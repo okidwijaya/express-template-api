@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(logger);
 app.use(express.static('pictures'));
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(mainRouter);
+app.use("/api/v1", mainRouter);
 
 // console.log('Connecting to DB with:', {
 //     host: "cloudsand.my.id",

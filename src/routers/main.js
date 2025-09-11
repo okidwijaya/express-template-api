@@ -9,6 +9,7 @@ const templateProductRouter = require("../routers/templateProductRouters");
 const templateCollectionRouter = require("../routers/templateCollectionRouter");
 const templateCartRouter = require("../routers/templateCartRouters");
 const templateTransactionRouter = require("../routers/templateTransactionRouters");
+const templateBlogRouter = require("../routers/templateBlogRouters");
 
 mainRouter.use(express.static(path.join(__dirname, 'public')));
 
@@ -18,9 +19,10 @@ mainRouter.use("/products", templateProductRouter);
 mainRouter.use("/collections", templateCollectionRouter);
 mainRouter.use("/cart", templateCartRouter);
 mainRouter.use("/transaction", templateTransactionRouter);
+mainRouter.use("/blog", templateBlogRouter)
 
 mainRouter.get("/", (request, response) => {
-  response.redirect("welcome");
+  response.redirect("/api/v1/welcome");
 });
 
 // mainRouter.get("/", (request, response) => {
