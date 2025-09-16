@@ -22,7 +22,7 @@ mainRouter.use("/transaction", templateTransactionRouter);
 mainRouter.use("/blog", templateBlogRouter)
 
 mainRouter.get("/", (request, response) => {
-  response.redirect("/api/v1/welcome");
+  response.redirect("/welcome");
 });
 
 // mainRouter.get("/", (request, response) => {

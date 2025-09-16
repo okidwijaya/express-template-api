@@ -1,5 +1,3 @@
-const pool = require('../config/db');
-const poolNews = require('../config/dbNews');
 const dbPool = require('../config/dbNews');
 
 const getAllArticlesModel = () => {
@@ -17,17 +15,18 @@ const getAllArticlesModel = () => {
 const getArticleDetailByIdModel = (id) => {
     return new Promise((resolve, reject) => {
         const query= `SELECT * FROM articles WHERE id = '${id}'`;
-        poolNews.query(query, (err, result) => {
+        dbPool.query(query, (err, result) => {
             if(err) return reject({status: 500, err});
             resolve({status: 200, result: result})
         })
     })
 }
 
+
 const deleteArticleDetailIdModel = (id) => {
     return new Promise((resolve, reject) => {
         const query = `DELETE FROM article WHERE id = '${id}'`;
-        poolNews.query(query, (err, result) => {
+        dbPool.execute(query, (err, result) => {
             if(err) return reject({status: 500, err})
             resolve({status: 200, result: result})
         })
@@ -41,9 +40,59 @@ const updateArticleDetailIdModel = (id, body) => {
             data: body
         }
         const query = `UPDATE article SET ? WHERE id = ${id}`;
-        poolNews.query(query, [body, id], (err, result) => {
+        dbPool.execute(query, [body, id], (err, result) => {
             if(err) return reject({status: 500, err})
             resolve({status: 200, result: data})
+        })
+    })
+}
+
+const addArticleModel = (body) => {
+    return new Promise((resolve, reject) => {
+        const query = 'INSERT INTO articles SET ?';
+        dbPool.execute(query, [body], (err, result) => {
+            if(err) return reject({status: 500, err});
+            resolve({status: 200, result: {id: result.insertId, body}})
+        })
+    })
+}
+
+const addArticleTagModel = (body) => {
+    return new Promise((resolve, reject) => {
+        const query = 'INSERT INTO articles_tags SET ?';
+        dbPool.execute(query, [body], (err, result) => {
+            if(err) return reject({status: 500, err});
+            resolve({status: 200, result: {id: result.insertId, body}})
+        })
+    })
+}
+
+const addBlogAuthorModel = (body) => {
+    return new Promise((resolve, reject) => {
+        const query = 'INSERT INTO authors SET ?';
+        dbPool.execute(query, [body], (err, result) => {
+            if(err) return reject({status: 500, err});
+            resolve({status: 200, result: {id: result.insertId, body}})
+        })
+    })
+}
+
+const addBlogTagModel = (body) => {
+    return new Promise((resolve, reject) => {
+        const query = 'INSERT INTO tags SET ?';
+        dbPool.execute(query, [body], (err, result) => {
+            if(err) return reject({status: 500, err});
+            resolve({status: 200, result: {id: result.insertId, body}})
+        })
+    })
+}
+
+const addBlogCategoriesModel = (body) => {
+    return new Promise((resolve, reject) => {
+        const query = 'INSERT INTO categories SET ?';
+        dbPool.execute(query, [body], (err, result) => {
+            if(err) return reject({status: 500, err});
+            resolve({status: 200, result: {id: result.insertId, body}})
         })
     })
 }
@@ -52,5 +101,10 @@ module.exports = {
     getAllArticlesModel,
     getArticleDetailByIdModel,
     deleteArticleDetailIdModel,
-    updateArticleDetailIdModel
+    updateArticleDetailIdModel,
+    addArticleModel,
+    addArticleTagModel,
+    addBlogAuthorModel,
+    addBlogCategoriesModel,
+    addBlogTagModel
 }
