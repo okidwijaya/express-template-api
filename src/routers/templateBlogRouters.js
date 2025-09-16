@@ -16,4 +16,6 @@ templateBlogRouter.post('/author', useController.addBlogAuthorController);
 templateBlogRouter.post('/categories', useController.addBlogCategoriesController);
 // templateBlogRouter.post('/categories', useController.addBlogTagController);
 
+templateBlogRouter.get('/articles/:slug', useController.getArticleDetailBySlugController);
+
 module.exports = templateBlogRouter;

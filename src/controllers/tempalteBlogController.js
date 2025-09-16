@@ -45,6 +45,24 @@ const getArticleDetailController = (req, res) => {
         })
 }
 
+const getArticleDetailBySlugController = (req, res) => {
+    const { slug } = req.params;
+
+    getArticleDetailBySlugModel(slug)
+        .then(({ status, result }) => {
+            res.status(200).json({
+                status: status,
+                result: result
+            })
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: 'Internal Server Error',
+                error: err
+            })
+        })
+}
+
 const updateArticleByIdController = (req, res) => {
     const { id } = req.params;
     const { body } = req;
@@ -182,5 +200,6 @@ module.exports = {
     addArticleTagController,
     addBlogAuthorController,
     addBlogCategoriesController,
-    addBlogTagController
+    addBlogTagController,
+    getArticleDetailBySlugController
 }

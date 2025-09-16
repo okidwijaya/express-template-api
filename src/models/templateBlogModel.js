@@ -22,6 +22,16 @@ const getArticleDetailByIdModel = (id) => {
     })
 }
 
+const getArticleDetailBySlugModel = (slug) => {
+    return new Promise((resolve, reject) => {
+        const query= `SELECT * FROM articles WHERE slug = '${slug}'`;
+        dbPool.query(query, (err, result) => {
+            if(err) return reject({status: 500, err});
+            resolve({status: 200, result: result})
+        })
+    })
+}
+
 
 const deleteArticleDetailIdModel = (id) => {
     return new Promise((resolve, reject) => {
@@ -106,5 +116,6 @@ module.exports = {
     addArticleTagModel,
     addBlogAuthorModel,
     addBlogCategoriesModel,
-    addBlogTagModel
+    addBlogTagModel,
+    getArticleDetailBySlugModel
 }
