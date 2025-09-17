@@ -19,14 +19,14 @@ mainRouter.use("/products", templateProductRouter);
 mainRouter.use("/collections", templateCollectionRouter);
 mainRouter.use("/cart", templateCartRouter);
 mainRouter.use("/transaction", templateTransactionRouter);
-mainRouter.use("/blog", templateBlogRouter)
-
-mainRouter.get("/", (request, response) => {
-  response.redirect("/welcome");
-});
+mainRouter.use("/api/v1/blog", templateBlogRouter)
 
 // mainRouter.get("/", (request, response) => {
-//   response.sendFile(path.join(__dirname, 'public', 'index.html'));
+//   response.redirect("/welcome");
 // });
+
+mainRouter.get("/", (request, response) => {
+  response.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 module.exports = mainRouter;

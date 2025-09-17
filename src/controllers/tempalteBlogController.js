@@ -7,7 +7,8 @@ const {
     addArticleTagModel,
     addBlogAuthorModel,
     addBlogCategoriesModel,
-    addBlogTagModel
+    addBlogTagModel,
+    getArticleDetailBySlugModel
 } = require('../models/templateBlogModel');
 
 const getAllArticlesController = (req, res) => {
