@@ -8,7 +8,8 @@ const {
     addBlogAuthorModel,
     addBlogCategoriesModel,
     addBlogTagModel,
-    getArticleDetailBySlugModel
+    getArticleDetailBySlugModel,
+    getBlogCategoriesModel
 } = require('../models/templateBlogModel');
 
 const getAllArticlesController = (req, res) => {
@@ -157,8 +158,26 @@ const addBlogAuthorController = (req, res) => {
 }
 
 const addBlogCategoriesController = (req, res) => {
+    const { body } = req;
 
-    addBlogCategoriesModel()
+    addBlogCategoriesModel(body)
+    .then(({status, result}) =>{
+        res.status(200).json({
+            status: status,
+            result: result,
+        })
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err,
+            message: 'Internal Server Error',
+        })
+    })
+}
+
+const getBlogCategoriesController = (req, res) => {
+    
+    getBlogCategoriesModel()
     .then(({status, result}) =>{
         res.status(200).json({
             status: status,
@@ -201,5 +220,6 @@ module.exports = {
     addBlogAuthorController,
     addBlogCategoriesController,
     addBlogTagController,
-    getArticleDetailBySlugController
+    getArticleDetailBySlugController,
+    getBlogCategoriesController
 }

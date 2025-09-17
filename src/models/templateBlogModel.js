@@ -97,10 +97,20 @@ const addBlogTagModel = (body) => {
     })
 }
 
-const addBlogCategoriesModel = () => {
+const getBlogCategoriesModel = () => {
     return new Promise((resolve, reject) => {
-        const query = 'INSERT INTO categories SET ?';
-        dbPool.execute(query, (err, result) => {
+        const query = 'SELECT * FROM categories SET ?';
+        dbPool.query(query, (err, result) => {
+            if(err) return reject({status: 500, err});
+            resolve({status: 200, result: {id: result.insertId, body}})
+        })
+    })
+}
+
+const addBlogCategoriesModel = (body) => {
+    return new Promise((resolve, reject) => {
+        const query = 'INSERT INTO categories';
+        dbPool.execute(query, [body], (err, result) => {
             if(err) return reject({status: 500, err});
             resolve({status: 200, result: {id: result.insertId, body}})
         })
@@ -117,5 +127,6 @@ module.exports = {
     addBlogAuthorModel,
     addBlogCategoriesModel,
     addBlogTagModel,
-    getArticleDetailBySlugModel
+    getArticleDetailBySlugModel,
+    getBlogCategoriesModel
 }

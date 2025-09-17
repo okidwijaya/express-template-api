@@ -14,7 +14,7 @@ templateBlogRouter.post('/articles/tags', useController.addArticleTagController)
 templateBlogRouter.post('/articles/tag', useController.addBlogTagController);
 templateBlogRouter.post('/author', useController.addBlogAuthorController);
 templateBlogRouter.post('/categories', useController.addBlogCategoriesController);
-// templateBlogRouter.post('/categories', useController.addBlogTagController);
+templateBlogRouter.get('/categories', useController.getBlogCategoriesController);
 
 templateBlogRouter.get('/article/:slug', useController.getArticleDetailBySlugController);
 
