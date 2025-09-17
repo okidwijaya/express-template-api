@@ -17,10 +17,12 @@ app.listen(port, () => {
 });
 
 const corsOptions = {
-    origin: ["http://localhost:3000", "http://localhost:8081", "https://web-commerce-gules.vercel.app", "*"],
+    origin: ["http://localhost:3000", "http://localhost:8081", "https://web-commerce-gules.vercel.app", "*", "https://urban-train-wgv99qg4r6p25vgp-3000.app.github.dev"],
     allowedHeaders:[ "x-access-token", "content-type"],
     method: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
 };
+
+//  origin: ["http://localhost:3000", "http://localhost:8081", "https://web-commerce-gules.vercel.app", "*"],
 
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
@@ -30,7 +32,6 @@ app.use(logger);
 app.use(express.static('pictures'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(mainRouter);
-// app.use("/api/v1", mainRouter);
 
 // console.log('Connecting to DB with:', {
 //     host: "cloudsand.my.id",

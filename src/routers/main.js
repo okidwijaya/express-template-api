@@ -21,12 +21,12 @@ mainRouter.use("/cart", templateCartRouter);
 mainRouter.use("/transaction", templateTransactionRouter);
 mainRouter.use("/api/v1/blog", templateBlogRouter)
 
-// mainRouter.get("/", (request, response) => {
-//   response.redirect("/welcome");
-// });
-
 mainRouter.get("/", (request, response) => {
-  response.sendFile(path.join(__dirname, 'public', 'index.html'));
+  response.redirect("/welcome");
 });
+
+// mainRouter.get("/", (request, response) => {
+//   response.sendFile(path.join(__dirname, 'public', 'index.html'));
+// });
 
 module.exports = mainRouter;
