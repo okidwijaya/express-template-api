@@ -157,9 +157,8 @@ const addBlogAuthorController = (req, res) => {
 }
 
 const addBlogCategoriesController = (req, res) => {
-    const { body } = req;
 
-    addBlogCategoriesModel(body)
+    addBlogCategoriesModel()
     .then(({status, result}) =>{
         res.status(200).json({
             status: status,

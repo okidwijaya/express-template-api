@@ -97,10 +97,10 @@ const addBlogTagModel = (body) => {
     })
 }
 
-const addBlogCategoriesModel = (body) => {
+const addBlogCategoriesModel = () => {
     return new Promise((resolve, reject) => {
         const query = 'INSERT INTO categories SET ?';
-        dbPool.execute(query, [body], (err, result) => {
+        dbPool.execute(query, (err, result) => {
             if(err) return reject({status: 500, err});
             resolve({status: 200, result: {id: result.insertId, body}})
         })
